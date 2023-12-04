@@ -1,0 +1,113 @@
+ <!DOCTYPE html>
+<html>
+
+<head>
+    <title>Tax Calculator</title>
+    <style>
+        body {
+            background-color: powderblue;
+
+        }
+
+        #result {
+            font-weight: bold;
+        }
+
+        .container {
+            width: 900px;
+            border: 3px dotted black;
+            background-color: rgb(250, 226, 205);
+            margin: 33px auto;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+
+
+        <h1>Tax Calculator</h1>
+        <br>
+        <label for="name"> Name </label>
+        <div>
+            <input type="text" id="name">
+        </div>
+        <br>
+        <label for="basic">Basic Salary:</label>
+        <input type="number" id="basic" placeholder="Enter Basic Salary"><br><br>
+
+        <label for="ta">TA:</label>
+        <input type="number" id="ta" placeholder="Enter Travel Allowance"><br><br>
+
+        <label for="da">DA:</label>
+        <input type="number" id="da" placeholder="Enter Dearness Allowance"><br><br>
+
+        <label for="hra">HRA:</label>
+        <input type="number" id="hra" placeholder="Enter House Rent Allowance"><br><br>
+
+
+        <label>Gender:</label>
+        <input type="radio" name="gender" value="male" id="male"> Male
+        <input type="radio" name="gender" value="female" id="female"> Female<br><br>
+
+        <button onclick="calculateTax()">Calculate Tax</button><br><br>
+
+        <label>Tax Percentage:</label>
+        <span id="taxPercentage"></span><br><br>
+
+        <label>Tax Amount:</label>
+        <span id="taxAmount"></span><br><br>
+
+        <label>Total Salary (Basic + HRA + DA + TA):</label>
+        <span id="totalSalary"></span><br><br>
+
+        <div id="result"></div>
+    </div>
+
+    <script>
+        function calculateTax() {
+
+            const basic = parseFloat(document.getElementById('basic').value);
+            const ta = parseFloat(document.getElementById('ta').value);
+            const da = parseFloat(document.getElementById('da').value);
+            const hra = parseFloat(document.getElementById('hra').value);
+
+            const totalSalary = basic + ta + da + hra;
+
+            const gender = document.querySelector('input[name="gender"]:checked').value;
+            let taxPercentage = 0;
+            let taxAmount = 0;
+
+            if (gender === 'male') {
+                if (totalSalary > 1500000) {
+                    taxPercentage = 30;
+                } else if (totalSalary >= 1000000) {
+                    taxPercentage = 20;
+                } else if (totalSalary >= 500000) {
+                    taxPercentage = 10;
+                }
+            } else if (gender === 'female') {
+                if (totalSalary > 1500000) {
+                    taxPercentage = 25;
+                } else if (totalSalary >= 1000000) {
+                    taxPercentage = 15;
+                } else if (totalSalary >= 500000) {
+                    taxPercentage = 5;
+                }
+            }
+
+            taxAmount = (taxPercentage / 100) * totalSalary;
+
+            document.getElementById('hraValue').textContent = hra.toFixed(2);
+            document.getElementById('daValue').textContent = da.toFixed(2);
+            document.getElementById('taValue').textContent = ta.toFixed(2);
+            document.getElementById('taxPercentage').textContent = taxPercentage + '%';
+            document.getElementById('taxAmount').textContent = '₹' + taxAmount.toFixed(2);
+            document.getElementById('totalSalary').textContent = '₹' + totalSalary.toFixed(2);
+
+            document.getElementById('result').textContent = Your tax is ₹${taxAmount.toFixed(2)}.;
+        }
+    </script>
+</body>
+
+</html> -->
